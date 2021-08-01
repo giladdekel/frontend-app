@@ -20,7 +20,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
-
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import { useDispatch, useSelector } from "react-redux";
 import "./Header.scss";
 import Link from "@material-ui/core/Link";
@@ -28,6 +28,17 @@ import Link from "@material-ui/core/Link";
 import { Route, NavLink } from "react-router-dom";
 import { signout } from "../../actions/userActions";
 // import { detailsUser, signout } from "./../../actions/userActions";
+const activeStyle = {
+  color: "#ff8000",
+};
+
+{
+  /* <NavLink activeStyle={activeStyle} exact to="/">
+{" "}
+<i className="fas fa-home fa-2x icon"></i>{" "}
+<span className="header-title home-title">Home</span>
+</NavLink> */
+}
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -120,13 +131,21 @@ function Header(props) {
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElAdmin, setAnchorElAdmin] = React.useState(null);
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
+  const isMenuOpenAdmin = Boolean(anchorElAdmin);
+
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleAdminMenuOpen = (event) => {
+    setAnchorElAdmin(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
@@ -135,6 +154,11 @@ function Header(props) {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMenuCloseAdmin = () => {
+    setAnchorElAdmin(null);
     handleMobileMenuClose();
   };
 
@@ -164,6 +188,23 @@ function Header(props) {
       <MenuItem onClick={handleMenuCloseSignOut}>Sign Out</MenuItem>
     </Menu>
   );
+
+  const renderAdminMenu = (
+    <Menu
+      anchorEl={anchorElAdmin}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpenAdmin}
+      onClose={handleMenuCloseAdmin}
+    >
+      <MenuItem onClick={handleMenuCloseAdmin}>Users List</MenuItem>
+      <MenuItem onClick={handleMenuCloseAdmin}>My account</MenuItem>
+    </Menu>
+  );
+
+
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -203,6 +244,19 @@ function Header(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+  
+      <MenuItem onClick={handleAdminMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Admin</p>
+      </MenuItem>
+ 
     </Menu>
   );
 
@@ -256,6 +310,22 @@ function Header(props) {
             </Link>
 
             <IconButton
+              aria-label="dashboard"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleAdminMenuOpen}
+              color="inherit"
+            >
+              {userInfo && !userInfo.isAdmin && (
+                <>
+                  <DashboardIcon />
+                </>
+              )}
+
+              {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.small} /> */}
+            </IconButton>
+
+            <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -292,6 +362,8 @@ function Header(props) {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
+      {renderAdminMenu}
+
       {renderMenu}
     </div>
   );
