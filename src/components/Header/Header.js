@@ -199,12 +199,12 @@ function Header(props) {
       open={isMenuOpenAdmin}
       onClose={handleMenuCloseAdmin}
     >
-      <MenuItem onClick={handleMenuCloseAdmin}>Users List</MenuItem>
+      <NavLink activeStyle={activeStyle} to="/userlist">
+        <MenuItem>Users List</MenuItem>
+      </NavLink>
       <MenuItem onClick={handleMenuCloseAdmin}>My account</MenuItem>
     </Menu>
   );
-
-
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -244,7 +244,7 @@ function Header(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-  
+
       <MenuItem onClick={handleAdminMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -256,7 +256,6 @@ function Header(props) {
         </IconButton>
         <p>Admin</p>
       </MenuItem>
- 
     </Menu>
   );
 

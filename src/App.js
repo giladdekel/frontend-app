@@ -6,9 +6,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./components/scroll-to-top/scroll-to-top.component";
 import NotFoundPage from "./screens/notfound/notfound.component";
 import HomeScreen from "./screens/HomeScreen/HomeScreen";
-import Header from './components/Header/Header';
-import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
-import SigninScreen from './screens/SigninScreen/SigninScreen';
+import Header from "./components/Header/Header";
+import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
+import SigninScreen from "./screens/SigninScreen/SigninScreen";
+import UserListNameScreen from "./screens/UserListNameScreen/UserListNameScreen";
+import UserEditScreen from "./screens/UserEditScreen/UserEditScreen";
 
 function App() {
   return (
@@ -23,24 +25,17 @@ function App() {
 
             <Route path="/register" component={RegisterScreen}></Route>
 
-
             <Route path="/signin" component={SigninScreen}></Route>
 
-            {/* <PrivateRoute
+            <Route path="/userlist" component={UserListNameScreen}></Route>
+
+            <Route path="/user/:id/edit" component={UserEditScreen}></Route>
+
+            {/* 
+            <PrivateRoute
             path="/profile"
             component={ProfileScreen}
-          ></PrivateRoute>
-
-          <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
-
-          <AdminRoute
-            path="/user/:id/edit"
-            component={UserEditScreen}
-          ></AdminRoute>
-
-      
-
-     */}
+          ></PrivateRoute> */}
 
             <Route component={NotFoundPage} />
           </Switch>
