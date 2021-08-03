@@ -9,7 +9,7 @@ import HomeScreen from "./screens/HomeScreen/HomeScreen";
 import Header from "./components/Header/Header";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen/SigninScreen";
-import UserListNameScreen from "./screens/UserListNameScreen/UserListNameScreen";
+import UserListScreen from "./screens/UserListScreen/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen/UserEditScreen";
 
 function App() {
@@ -27,15 +27,11 @@ function App() {
 
             <Route path="/signin" component={SigninScreen}></Route>
 
-            <Route path="/userlist" component={UserListNameScreen}></Route>
+            <Route path="/userlist" component={UserListScreen}></Route>
 
             <Route path="/user/:id/edit" component={UserEditScreen}></Route>
 
-            {/* 
-            <PrivateRoute
-            path="/profile"
-            component={ProfileScreen}
-          ></PrivateRoute> */}
+            {/* <Route path="/profile" component={ProfileScreen}></Route> */}
 
             <Route component={NotFoundPage} />
           </Switch>

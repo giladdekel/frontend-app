@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Link from '@material-ui/core/Link';
+import Link from "@material-ui/core/Link";
 
 // import { Link } from "react-router-dom";
 // import {
@@ -10,12 +10,12 @@ import Link from '@material-ui/core/Link';
 // } from "../../actions/userActions";
 // import LoadingBox from "../../components/LoadingBox";
 // import MessageBox from "../../components/MessageBox";
-// import { GoogleLogin } from "react-google-login";
-// import GitHubLogin from "react-github-login";
+import { GoogleLogin } from "react-google-login";
+import GitHubLogin from "react-github-login";
 
-// import "./SigninScreen.scss";
+import "./SigninScreen.scss";
 // import { findByEmail } from "./../../actions/userActions";
-// import ReactFacebookLogin from "react-facebook-login";
+import ReactFacebookLogin from "react-facebook-login";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -97,18 +97,18 @@ export default function SigninScreen(props) {
     dispatch(signin(email, password));
   };
 
-  // const responseFacebook = (response) => {
-  //   // console.log("response :", response);
-  //   // console.log("response :", response.accessToken);
-  //   dispatch(findFacebookByEmail(response));
-  // };
+  const responseFacebook = (response) => {
+    console.log("response :", response);
+    console.log("response :", response.accessToken);
+    // dispatch(findFacebookByEmail(response));
+  };
 
-  // const responseGoogle = (response) => {
-  //   // console.log("response :", response);
-  //   // console.log("response :", response.tokenId);
+  const responseGoogle = (response) => {
+    console.log("response :", response);
+    console.log("response :", response.tokenId);
 
-  //   dispatch(findByEmail(response));
-  // };
+    // dispatch(findByEmail(response));
+  };
 
   useEffect(() => {
     if (userInfo) {
@@ -175,29 +175,28 @@ export default function SigninScreen(props) {
             Sign In
           </Button>
           <Grid container>
-
-            {/* <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_ID}
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            // cookiePolicy="single_host_origin"
-            theme="dark"
-          />
-          <ReactFacebookLogin
-            icon="fa-facebook"
-            appId={process.env.REACT_APP_FACEBOOK_ID}
-            // autoLoad={true}
-            fields="name,email,picture"
-            // onClick={componentClicked}
-            // onSuccess={responseFacebook}
-            callback={responseFacebook}
-          /> */}
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_ID}
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              // cookiePolicy="single_host_origin"
+              theme="dark"
+            />
+            <ReactFacebookLogin
+              icon="fa-facebook"
+              appId={process.env.REACT_APP_FACEBOOK_ID}
+              // autoLoad={true}
+              fields="name,email,picture"
+              // onClick={componentClicked}
+              // onSuccess={responseFacebook}
+              callback={responseFacebook}
+            />
 
             {/* <GitHubLogin
-            clientId="603a2ad4134171bc96a4"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-          /> */}
+              clientId="603a2ad4134171bc96a4"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+            /> */}
 
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -211,8 +210,7 @@ export default function SigninScreen(props) {
             </Grid>
           </Grid>
           {loading && <CircularProgress />}
-            {error && <Alert severity="error">{error}</Alert>}
-
+          {error && <Alert severity="error">{error}</Alert>}
         </form>
       </div>
       <Box mt={8}>
